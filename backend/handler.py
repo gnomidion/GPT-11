@@ -35,7 +35,7 @@ def generate_audio(generated_text):
     api_key = "0359cb5992b3021b841131c304252349"
 
     # Voice id
-    voice_id = "21m00Tcm4TlvDq8ikWAM"
+    voice_id = "a2KUMYv7Irop7haWtEIs"
 
     # Voice params
     data = {

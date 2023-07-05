@@ -363,33 +363,24 @@ margin-bottom: ${({ theme }) => theme.spacing(1)};
 justify-content: ${({ align }) => (align === 'user' ? 'flex-end' : 'flex-start')};
 `;
 
-const ChatMessages = ({ messages }) => {
-  const theme = useTheme();
-  const bottomRef = useRef(null);
+  const ChatMessages = ({ messages }) => {
+    const theme = useTheme();
+    const bottomRef = useRef(null);
 
-  const scrollToBottom = () => {
-    if (bottomRef.current) {
-      if (typeof bottomRef.current.scrollIntoViewIfNeeded === 'function') {
-        bottomRef.current.scrollIntoViewIfNeeded({ behavior: 'smooth' });
-      } else {
-        bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    const scrollToBottom = () => {
+      if (bottomRef.current) {
+        if (typeof bottomRef.current.scrollIntoViewIfNeeded === 'function') {
+          bottomRef.current.scrollIntoViewIfNeeded({ behavior: 'smooth' });
+        } else {
+          bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
       }
-    }
-  };
+    };
 
-  // Hook that scrolls the chat to the bottom and plays the assistant's audio messages whenever the messages prop changes
-  useEffect(() => {
-    scrollToBottom();
-
-    // Get the last message
-    const lastMessage = messages[messages.length - 1];
-
-    // Check if it's an assistant message and if it has associated audio
-    if (lastMessage.role === 'assistant' && lastMessage.audio) {
-      lastMessage.audio.play();
-    }
-
-  }, [messages]);
+    // Hook that scrolls the chat to the bottom whenever the messages prop changes
+    useEffect(() => {
+      scrollToBottom();
+    }, [messages]);
 
 
     return (
@@ -569,10 +560,9 @@ const ChatMessages = ({ messages }) => {
     <Container maxWidth="sm" sx={{ pt: 2 }}>
       <ChatHeader />
       <ChatMessages messages={messages} />
-      <MessageInput message={message} setMessage={setMessage} isAudioResponse={isAudioResponse} handleSendMessage={handleSendMessage} />
+      <AudioControls isAudioResponse={isAudioResponse} filterMessageObjects={filterMessageObjects} messages={messages} setMessages={setMessages} handleBackendResponse={handleBackendResponse} />
+      <MessageInput message={message} setMessage={setMessage} isAudioResponse={isAudioResponse} handleSendMessage={handleSendMessage} handleBackendResponse={handleBackendResponse} />
       <ResponseFormatToggle isAudioResponse={isAudioResponse} setIsAudioResponse={setIsAudioResponse} />
-      <AudioControls isAudioResponse={isAudioResponse} filterMessageObjects={filterMessageObjects} messages={messages}
-        setMessages={setMessages} handleBackendResponse={handleBackendResponse} />
     </Container>
 
   );
