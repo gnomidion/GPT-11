@@ -12,7 +12,7 @@ plugins:
 functions:
   chatgpt-audio-chatbot:
     handler: handler.handler
-    timeout: 30
+    timeout: 120
     events:
       - http:
           path: get-answer

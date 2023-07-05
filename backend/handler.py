@@ -55,7 +55,7 @@ def generate_audio(generated_text):
 
     try:
         # Add a 15-second timeout to the request
-        response = requests.post(url, headers=headers, json=data, timeout=15)
+        response = requests.post(url, headers=headers, json=data, timeout=45)
     except Timeout:
         # Return None if the request times out
         return None
