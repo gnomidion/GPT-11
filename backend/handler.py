@@ -5,7 +5,7 @@ import io
 import requests
 from requests.exceptions import Timeout
 
-openai.api_key = "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"
+openai.api_key = "OPENAI-API-KEY"
 
 def transcribe_audio(audio_data):
     # Convert the audio data into a file-like object using io.BytesIO
@@ -32,10 +32,10 @@ def generate_chat_completion(messages):
 
 def generate_audio(generated_text):
     # API key
-    api_key = "0359cb5992b3021b841131c304252349"
+    api_key = "ELEVENLABS-API-KEY"
 
     # Voice id
-    voice_id = "a2KUMYv7Irop7haWtEIs"
+    voice_id = "ELEVENLABS-VOICE-ID"
 
     # Voice params
     data = {
